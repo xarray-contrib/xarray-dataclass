@@ -73,7 +73,7 @@ dev = { features = ["dev"], solve-group = "default" }
 [tool.pixi.feature.dev.tasks]
 tests = "pytest"
 flake8 = "flake8 docs tests src/xarray_dataclasses"
-black = "black --check docs tests xarray_dataclasses"
+black = "black docs tests src/xarray_dataclasses"
 doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclasses && sphinx-build -a docs docs/_build" }
 pyright = "pyright docs tests src/xarray_dataclasses"
 

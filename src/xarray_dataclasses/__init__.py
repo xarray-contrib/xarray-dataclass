@@ -16,7 +16,7 @@ __all__ = [
     "datamodel",
     "dataoptions",
     "typing",
-    "__version__"
+    "__version__",
 ]
 
 
