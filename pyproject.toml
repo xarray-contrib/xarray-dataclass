@@ -1,35 +1,76 @@
-[tool.poetry]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
 name = "xarray-dataclasses"
 version = "1.9.1"
 description = "xarray data creation by data classes"
-authors = ["Akio Taniguchi <taniguchi@a.phys.nagoya-u.ac.jp>"]
-keywords = ["xarray", "dataclass", "dataarray", "dataset", "typing"]
-license = "MIT"
+authors = [
+    {name = "Akio Taniguchi", email = "taniguchi.akio@gmail.com"},
+    {name = "Wouter-Michiel Vierdag", email = "michiel.vierdag@scverse.org"}
+]
 readme = "README.md"
-homepage = "https://github.com/astropenguin/xarray-dataclasses/"
-repository = "https://github.com/astropenguin/xarray-dataclasses/"
-documentation = "https://astropenguin.github.io/xarray-dataclasses/"
+license.file = "LICENSE"
 
-[tool.poetry.dependencies]
-python = ">=3.8, <3.14"
-numpy = [
-    { version = ">=1.22, <1.25", python = ">=3.8, <3.9" },
-    { version = ">=1.22, <3.0", python = ">=3.9, <3.14" },
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
-typing-extensions = "^4.0"
-xarray = [
-    { version = ">=2022.3, <2023.2", python = ">=3.8, <3.9" },
-    { version = ">=2022.3, <2025.0", python = ">=3.9, <3.14" },
+keywords = ["xarray", "dataclass", "dataarray", "dataset", "typing"]
+
+requires-python = ">=3.8, <3.14"
+dependencies = [
+    "typing-extensions >=4.14.1,<5",
+    "numpy >=2.3.1,<3",
+    "xarray >=2025.7.1,<2026"
+    ]
+
+[project.urls]
+Homepage = "https://github.com/astropenguin/xarray-dataclasses/"
+Repository = "https://github.com/astropenguin/xarray-dataclasses/"
+Documentation = "https://astropenguin.github.io/xarray-dataclasses/"
+
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.4",
+    "build>=1.0.0",
+    "flake8>=7.0.0",
+    "ipython>=8.12",
+    "myst-parser>=3.0",
+    "pydata-sphinx-theme>=0.14",
+    "pyright>=1.1",
+    "pytest>=8.2",
+    "sphinx>=7.1",
+    "twine>=4.0.0",
 ]
 
-[tool.poetry.group.dev.dependencies]
-black = "^24.4"
-ipython = "^8.12"
-myst-parser = "^3.0"
-pydata-sphinx-theme = "^0.14"
-pyright = "^1.1"
-pytest = "^8.2"
-sphinx = "^7.1"
+[tool.hatch.build]
+include = [
+    "README.md",
+    "LICENSE"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/xarray_dataclasses"]
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+
+[tool.pixi.feature.dev.tasks]
+test = "pytest"
 
 [tool.pyright]
 reportImportCycles = "warning"
@@ -38,6 +79,9 @@ reportUnknownMemberType = "warning"
 reportUnknownVariableType = "warning"
 typeCheckingMode = "strict"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pixi.pypi-dependencies]
+xarray-dataclasses = { path = ".", editable = true }
+
+[tool.pixi.dependencies]
+# Allows to specify the pixi conda executable to be able to set the python interpreter.
+pixi-pycharm = ">=0.0.8,<0.0.9"

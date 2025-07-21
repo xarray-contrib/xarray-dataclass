@@ -51,11 +51,11 @@ Thank you for your contribution!
 
 ## Development environment
 
-We manage the development environment (i.e., Python and JavaScript and their dependencies) with [Poetry][poetry] and [Node.js][nodejs].
+We manage the development environment (i.e., Python and JavaScript and their dependencies) with [pip][pip] and [Node.js][nodejs].
 After cloning the repository you forked, you can setup the environment by the following command.
 
 ```shell
-poetry install
+pip install -e ".[dev]"
 npm install
 ```
 
@@ -68,9 +68,9 @@ It is used for status checks when a pull request is created.
 If you would like to check them in local, the following commands are almost equivalent (the difference is that the workflow is run under multiple Python versions).
 
 ```shell
-poetry run pytest docs tests xarray_dataclasses
-poetry run flake8 docs tests xarray_dataclasses
-poetry run black --check docs tests xarray_dataclasses
+pytest docs tests xarray_dataclasses
+flake8 docs tests xarray_dataclasses
+black --check docs tests xarray_dataclasses
 npm run pyright docs tests xarray_dataclasses
 ```
 
@@ -95,7 +95,7 @@ When [a release is created][release], the workflow is triggered and the docs are
 [issues]: https://github.com/astropenguin/xarray-dataclasses/issues?q=is%3Aissue
 [napoleon-google]: https://www.sphinx-doc.org/en/master/usage/extensions/example_google.html#example-google
 [nodejs]: https://nodejs.org/
-[poetry]: https://python-poetry.org/
+[pip]: https://pip.pypa.io/en/stable/
 [pull-requests]: https://github.com/astropenguin/xarray-dataclasses/pulls?q=is%3Apr
 [pypi]: https://pypi.org/project/xarray-dataclasses/
 [pypi-workflow]: https://github.com/astropenguin/xarray-dataclasses/blob/main/.github/workflows/pypi.yml
