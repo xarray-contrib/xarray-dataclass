@@ -1,4 +1,0 @@
-#!/bin/bash -eu
-
-sphinx-apidoc -efMT -d 2 -o docs/_apidoc xarray_dataclasses
-sphinx-build -a docs docs/_build

@@ -4,7 +4,8 @@
 [![Python](https://img.shields.io/pypi/pyversions/xarray-dataclasses?label=Python&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclasses/)
 [![Downloads](https://img.shields.io/pypi/dm/xarray-dataclasses?label=Downloads&color=cornflowerblue&style=flat-square)](https://pepy.tech/project/xarray-dataclasses)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.4624819-cornflowerblue?style=flat-square)](https://doi.org/10.5281/zenodo.4624819)
-[![Tests](https://img.shields.io/github/actions/workflow/status/astropenguin/xarray-dataclasses/tests.yml?label=Tests&style=flat-square)](https://github.com/astropenguin/xarray-dataclasses/actions)
+[![Tests](https://img.shields.io/github/actions/workflow/status/astropenguin/xarray-dataclasses/tests.yml?label=Tests&style=flat-square)](https://github.com/astropenguin/xarray-dataclasses/actions/workflows/tests.yaml)
+[![Release](https://github.com/melonora/xarray-dataclasses/actions/workflows/pypi.yaml/badge.svg?event=release)](https://github.com/melonora/xarray-dataclasses/actions/workflows/pypi.yaml)
 
 xarray data creation by data classes
 
@@ -46,8 +47,13 @@ class Image(AsDataArray):
 
 ### Installation
 
+There are multiple ways you can install xarray-dataclasses, dependent on what kind of dependency manager you use.
+
 ```shell
 pip install xarray-dataclasses
+conda install -c conda-forge xarray-dataclasses
+pixi add xarray-dataclasses
+pixi add --pypi xarray-dataclasses
 ```
 
 ## Basic usage
@@ -338,6 +344,69 @@ class Image:
 image = asdataarray(Image([[0, 1], [2, 3]], [0, 1], [0, 1]))
 ```
 
+## How to contribute
+
+Thank you for being willing to contribute! If you have some ideas to propose, please open an [issue](https://github.com/xarray-contrib/xarray-dataclasses/issues).
+We use [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) for developing and managing the project.
+The first section describes how to contribute with it.
+The second and third sections explain how to prepare a local development environment and our automated workflows in GitHub Actions, respectively.
+
+
+### Get the source code
+
+```shell
+git clone https://github.com/xarray-contrib/xarray-dataclasses
+cd xarray-dataclasses
+```
+
+### Install dependencies
+
+First install [pixi](https://pixi.sh/latest/installation/). Then, install project dependencies:
+
+```shell
+pixi install -a
+pixi run pre-commit-install
+```
+
+### Testing, linting, and formatting
+We have [a test workflow][test-workflow] for testing, static type checking, linting, and formatting the code.
+It is used for status checks when a pull request is created.
+If you would like to check them in local, the following commands are almost equivalent (the difference is that the workflow is run under multiple Python versions).
+Furthermore, these tasks are defined only in the `dev` environment. Pixi does not require you to specify the environment
+in that case.
+
+```shell
+pixi run tests
+pixi run flake8
+pixi run black
+pixi run pyright
+```
+
+### Creating documentation
+We also have a [documentation workflow] (Add link). However, if you want to locally create the documentation 
+run the following:
+
+```shell
+pixi run doc_build
+```
+
+### Create a release
+
+This section is relevant only for maintainers.
+
+1. Pull `git`'s `main` branch.
+2. `pixi install -a`
+3. `pixi run pre-commit-install`
+4. `pixi run -e test test`
+5. `pixi shell`
+6. `hatch version <new-version>`
+7. `git add .`
+8. `git commit -m "ENH: Bump version to <version>"`
+9. `hatch build`
+10. `hatch publish`
+11. `git push upstream main`
+12. Create a new tag and Release via the GitHub UI. Auto-generate release notes
+    and add additional notes as needed.
 
 <!-- References -->
 [Pyright]: https://github.com/microsoft/pyright

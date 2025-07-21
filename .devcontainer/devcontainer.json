@@ -1,25 +1,25 @@
 {
     "name": "xarray-dataclasses",
-    "image": "ghcr.io/astral-sh/uv:python3.12-bookworm",
-    "runArgs": [
-        "--name=xarray-dataclasses"
-    ],
-    "containerEnv": {
-        "UV_PROJECT_ENVIRONMENT": "/usr/local"
-    },
-    "postCreateCommand": "uv sync --frozen",
+    "image":"python:3.13",
+    "postCreateCommand": "pip install -e \".[dev]\" && npm install",
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-python.black-formatter",
+                "github.vscode-pull-request-github",
+                "mhutchie.git-graph",
+                "ms-python.python",
                 "streetsidesoftware.code-spell-checker",
                 "tamasfe.even-better-toml"
             ],
             "settings": {
+                "files.insertFinalNewline": true,
+                "files.trimTrailingWhitespace": true,
+                "python.formatting.provider": "black",
                 "python.languageServer": "Pylance",
                 "[python]": {
-                    "editor.defaultFormatter": "ms-python.black-formatter",
-                    "editor.formatOnSave": true
+                    "editor.formatOnSave": true,
+                    "editor.insertSpaces": true,
+                    "editor.tabSize": 4
                 }
             }
         }

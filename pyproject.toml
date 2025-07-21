@@ -1,11 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "xarray-dataclasses"
-version = "2.0.0"
+dynamic = ["version"]
 description = "xarray data creation by data classes"
+authors = [
+    {name = "Akio Taniguchi", email = "taniguchi.akio@gmail.com"},
+    {name = "Wouter-Michiel Vierdag", email = "michiel.vierdag@scverse.org"}
+]
 readme = "README.md"
-keywords = ["dataclasses", "specifications", "typing", "xarray"]
-requires-python = ">=3.9,<3.14"
-dependencies = ["dataspecs>=2.0,<3.0", "xarray>=2022.3,<2026.0"]
+license.file = "LICENSE"
+
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
@@ -15,32 +22,71 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
 ]
+keywords = ["xarray", "dataclass", "dataarray", "dataset", "typing"]
 
-[[project.authors]]
-name = "Akio Taniguchi"
-email = "taniguchi.akio@gmail.com"
-
-[project.license]
-file = "LICENSE"
+requires-python = ">=3.9, <3.14"
+dependencies = [
+    "numpy >=2.0.0,<3",
+    "xarray >=2022.3,<2026",
+    "typing-extensions>=4.10.0,<5"]
 
 [project.urls]
-homepage = "https://astropenguin.github.io/xarray-dataclasses/v2.0.0"
-repository = "https://github.com/astropenguin/xarray-dataclasses"
+Homepage = "https://github.com/xarray-contrib/xarray-dataclasses/"
+Repository = "https://github.com/xarray-contrib/xarray-dataclasses/"
+Documentation = "https://xarray-contrib.github.io/xarray-dataclasses/"
 
-[dependency-groups]
+
+[project.optional-dependencies]
 dev = [
-    "black>=24.8",
-    "ipython>=8.18",
+    "black>=24.4",
+    "build>=1.0.0",
+    "flake8>=7.0.0",
+    "ipython>=8.12",
     "myst-parser>=3.0",
-    "pydata-sphinx-theme>=0.16",
+    "pydata-sphinx-theme>=0.14",
     "pyright>=1.1",
-    "pytest>=8.3",
-    "sphinx>=7.4",
+    "pytest>=8.2",
+    "sphinx>=7.1",
+    "twine>=4.0.0",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[tool.hatch.build]
+include = [
+    "README.md",
+    "LICENSE"
+]
+
+[tool.hatch.version]
+path = "src/xarray_dataclasses/__about__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/xarray_dataclasses"]
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+
+[tool.pixi.feature.dev.tasks]
+tests = "pytest"
+flake8 = "flake8 docs tests src/xarray_dataclasses"
+black = "black docs tests src/xarray_dataclasses"
+doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclasses && sphinx-build -a docs docs/_build" }
+pyright = "pyright docs tests src/xarray_dataclasses"
 
 [tool.pyright]
+reportImportCycles = "warning"
+reportUnknownArgumentType = "warning"
+reportUnknownMemberType = "warning"
+reportUnknownVariableType = "warning"
 typeCheckingMode = "strict"
+
+[tool.pixi.pypi-dependencies]
+xarray-dataclasses = { path = ".", editable = true }
+
+[tool.pixi.dependencies]
+# Allows to specify the pixi conda executable to be able to set the python interpreter.
+pixi-pycharm = ">=0.0.8,<0.0.9"

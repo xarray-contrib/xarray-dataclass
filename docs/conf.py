@@ -1,11 +1,10 @@
 # project information
 author = "Akio Taniguchi"
-copyright = "2020-2025 Akio Taniguchi"
+copyright = "2020-2024 Akio Taniguchi"
 
 
 # general configuration
 add_module_names = False
-autodoc_member_order = "bysource"
 autodoc_typehints = "both"
 autodoc_typehints_format = "short"
 exclude_patterns = [
@@ -25,8 +24,13 @@ templates_path = ["_templates"]
 
 
 # options for HTML output
+html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
-    "github_url": "https://github.com/astropenguin/xarray-dataclasses",
-    "logo": {"text": "xarray-dataclasses"},
+    "logo": {
+        "image_light": "logo-light.svg",
+        "image_dark": "logo-dark.svg",
+    },
+    "github_url": "https://github.com/astropenguin/xarray-dataclasses/",
+    "twitter_url": "https://twitter.com/astropengu_in/",
 }
