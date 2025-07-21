@@ -24,9 +24,9 @@ jobs:
       - name: Install project dependencies
         run: pip install -e ".[dev]"
       - name: Test code's formatting (Black)
-        run: black --check docs tests xarray_dataclasses
+        run: black --check docs tests src/xarray_dataclasses
       - name: Test code's typing (Pyright)
-        run: pyright docs tests xarray_dataclasses
+        run: pyright docs tests src/xarray_dataclasses
       - name: Test code's execution (pytest)
         run: pytest -v tests
       - name: Test docs' building (Sphinx)
