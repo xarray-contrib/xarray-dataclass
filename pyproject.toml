@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "xarray-dataclasses"
-version = "1.9.1"
+dynamic = ["version"]
 description = "xarray data creation by data classes"
 authors = [
     {name = "Akio Taniguchi", email = "taniguchi.akio@gmail.com"},
@@ -24,16 +24,16 @@ classifiers = [
 ]
 keywords = ["xarray", "dataclass", "dataarray", "dataset", "typing"]
 
-requires-python = ">=3.8, <3.14"
+requires-python = ">=3.9, <3.14"
 dependencies = [
     "numpy >=2.0.0,<3",
     "xarray >=2022.3,<2026",
     "typing-extensions>=4.10.0,<5"]
 
 [project.urls]
-Homepage = "https://github.com/melonora/xarray-dataclasses/"
-Repository = "https://github.com/melonora/xarray-dataclasses/"
-Documentation = "https://melonora.github.io/xarray-dataclasses/"
+Homepage = "https://github.com/xarray-contrib/xarray-dataclasses/"
+Repository = "https://github.com/xarray-contrib/xarray-dataclasses/"
+Documentation = "https://xarray-contrib.github.io/xarray-dataclasses/"
 
 
 [project.optional-dependencies]
@@ -56,6 +56,9 @@ include = [
     "LICENSE"
 ]
 
+[tool.hatch.version]
+path = "src/xarray_dataclasses/__about__.py"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/xarray_dataclasses"]
 
@@ -68,8 +71,11 @@ default = { solve-group = "default" }
 dev = { features = ["dev"], solve-group = "default" }
 
 [tool.pixi.feature.dev.tasks]
-test = "pytest"
-doc_build = "python -m sphinx -b html docs docs/_build"
+tests = "pytest"
+flake8 = "flake8 docs tests src/xarray_dataclasses"
+black = "black --check docs tests xarray_dataclasses"
+doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclasses && sphinx-build -a docs docs/_build" }
+pyright = "pyright docs tests src/xarray_dataclasses"
 
 [tool.pyright]
 reportImportCycles = "warning"

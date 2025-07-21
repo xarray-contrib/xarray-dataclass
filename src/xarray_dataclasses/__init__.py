@@ -16,8 +16,8 @@ __all__ = [
     "datamodel",
     "dataoptions",
     "typing",
+    "__version__"
 ]
-__version__ = "1.9.1"
 
 
 # submodules
@@ -26,6 +26,7 @@ from . import dataset
 from . import datamodel
 from . import dataoptions
 from . import typing
+from .__about__ import __version__
 from .dataarray import *
 from .dataset import *
 from .datamodel import *

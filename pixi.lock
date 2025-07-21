@@ -2890,11 +2890,11 @@ packages:
 - pypi: ./
   name: xarray-dataclasses
   version: 1.9.1
-  sha256: 7a80c9712cc6295321cd57094bd8e1c3486ec590a1a7c5d41649b1539d4cf295
+  sha256: a17c30d34b8c50491437acbce77e3a7d7bddbcd597dc8a406bf6c730a7c600d7
   requires_dist:
   - numpy>=2.0.0,<3
-  - xarray>=2022.3,<2026
   - typing-extensions>=4.10.0,<5
+  - xarray>=2022.3,<2026
   - black>=24.4 ; extra == 'dev'
   - build>=1.0.0 ; extra == 'dev'
   - flake8>=7.0.0 ; extra == 'dev'
@@ -2905,5 +2905,5 @@ packages:
   - pytest>=8.2 ; extra == 'dev'
   - sphinx>=7.1 ; extra == 'dev'
   - twine>=4.0.0 ; extra == 'dev'
-  requires_python: '>=3.8,<3.14'
+  requires_python: '>=3.9,<3.14'
   editable: true
