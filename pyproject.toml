@@ -32,9 +32,9 @@ dependencies = [
     "typing-extensions>=4.10.0,<5"]
 
 [project.urls]
-Homepage = "https://github.com/astropenguin/xarray-dataclasses/"
-Repository = "https://github.com/astropenguin/xarray-dataclasses/"
-Documentation = "https://astropenguin.github.io/xarray-dataclasses/"
+Homepage = "https://github.com/melonora/xarray-dataclasses/"
+Repository = "https://github.com/melonora/xarray-dataclasses/"
+Documentation = "https://melonora.github.io/xarray-dataclasses/"
 
 
 [project.optional-dependencies]
@@ -70,6 +70,7 @@ dev = { features = ["dev"], solve-group = "default" }
 
 [tool.pixi.feature.dev.tasks]
 test = "pytest"
+doc_build = "python -m sphinx -b html docs docs/_build"
 
 [tool.pyright]
 reportImportCycles = "warning"

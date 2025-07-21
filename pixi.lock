@@ -2890,7 +2890,7 @@ packages:
 - pypi: ./
   name: xarray-dataclasses
   version: 1.9.1
-  sha256: 8a74c8bf4aa6b937553754987ddf81f16e1e50014622d9cc5977ba5022e7ea73
+  sha256: 1c92ca9486322e0fde3ae7830d097383bff2eeb92353e5a4a75a24ce10f48898
   requires_dist:
   - numpy>=2.0.0,<3
   - xarray>=2025.7.1,<2026
