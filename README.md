@@ -1,10 +1,12 @@
 # Important Note
-This repository is a fork from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the 
+This repository was a fork from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the 
 work of the developer on this repo. That being said, sadly the state on main has been the case that the code was 
-deleted and there has been no development for a while. Therefore, we have decided to fork the repository and 
-continue development here, where the community is better able to contribute to and maintain the project.
+deleted and there has been no development for a while. Therefore, we intially decided to fork the repository and 
+continue development here, where the community is better able to contribute to and maintain the project. We now changed
+it into a standalone repository.
 
-Note, the fork currently is not released. We are trying to get the name `xarray-dataclasses` on PyPi.
+Note, the repository is not yet released. We are trying to get the name `xarray-dataclasses` on PyPi and make some 
+additional changes before release.
 
 # xarray-dataclasses
 
