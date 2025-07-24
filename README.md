@@ -5,8 +5,7 @@ deleted and there has been no development for a while. Therefore, we intially de
 continue development here, where the community is better able to contribute to and maintain the project. We now changed
 it into a standalone repository.
 
-Note, the repository is not yet released. We are trying to get the name `xarray-dataclasses` on PyPi and make some 
-additional changes before release.
+Note, the repository is not yet released. We are making some additional changes before release.
 
 # xarray-dataclasses
 
