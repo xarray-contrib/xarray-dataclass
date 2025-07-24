@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "xarray-dataclasses"
+name = "xarray-dataclass"
 dynamic = ["version"]
 description = "xarray data creation by data classes"
 authors = [
