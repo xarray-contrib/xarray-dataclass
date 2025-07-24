@@ -85,7 +85,7 @@ reportUnknownVariableType = "warning"
 typeCheckingMode = "strict"
 
 [tool.pixi.pypi-dependencies]
-xarray-dataclasses = { path = ".", editable = true }
+xarray-dataclass = { path = ".", editable = true }
 
 [tool.pixi.dependencies]
 # Allows to specify the pixi conda executable to be able to set the python interpreter.
