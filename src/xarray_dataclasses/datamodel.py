@@ -187,12 +187,12 @@ class DataModel:
         model = cls()
         eval_dataclass(dataclass)
 
-        for field in dataclass.__dataclass_fields__.values():
-            value = getattr(dataclass, field.name, MISSING)
-            entry = get_entry(field, value)
+        for field_value in dataclass.__dataclass_fields__.values():
+            value = getattr(dataclass, field_value.name, MISSING)
+            entry = get_entry(field_value, value)
 
             if entry is not None:
-                model.entries[field.name] = entry
+                model.entries[field_value.name] = entry
 
         return model
 
@@ -203,10 +203,10 @@ def eval_dataclass(dataclass: AnyDataClass[PInit]) -> None:
     if not is_dataclass(dataclass):
         raise TypeError("Not a dataclass or its object.")
 
-    fields = dataclass.__dataclass_fields__.values()
+    field_values = dataclass.__dataclass_fields__.values()
 
     # do nothing if field types are already evaluated
-    if not any(isinstance(field.type, str) for field in fields):
+    if not any(isinstance(field_value.type, str) for field_value in field_values):
         return
 
     # otherwise, replace field types with evaluated types
@@ -215,8 +215,8 @@ def eval_dataclass(dataclass: AnyDataClass[PInit]) -> None:
 
     types = get_type_hints(dataclass, include_extras=True)
 
-    for field in fields:
-        field.type = types[field.name]
+    for field_value in field_values:
+        field_value.type = types[field_value.name]
 
 
 def get_entry(field: AnyField, value: Any) -> Optional[AnyEntry]:
