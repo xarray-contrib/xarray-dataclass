@@ -59,8 +59,8 @@ TDims = TypeVar("TDims", covariant=True)
 TDType = TypeVar("TDType", covariant=True)
 THashable = TypeVar("THashable", bound=Hashable)
 
-AnyArray: TypeAlias = np.ndarray
-AnyDType: TypeAlias = np.dtype
+AnyArray: TypeAlias = np.ndarray[Any, Any]
+AnyDType: TypeAlias = np.dtype[Any]
 AnyField: TypeAlias = Field[Any]
 AnyXarray: TypeAlias = Union[xr.DataArray, xr.Dataset]
 Dims = Tuple[str, ...]

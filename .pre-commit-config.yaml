@@ -13,11 +13,15 @@ repos:
     - id: ruff-check
       args: [--fix]        # optional, to autofix lint errors
     - id: ruff-format
-- repo: https://github.com/RobertCraigie/pyright-python
+#- repo: https://github.com/RobertCraigie/pyright-python
+#  rev: v1.1.403
+#  hooks:
+#    - id: pyright
+#      name: "python · Check types"
+- repo: https://github.com/fsouza/mirrors-pyright
   rev: v1.1.403
   hooks:
     - id: pyright
-      name: "python · Check types"
 - repo: https://github.com/abravalheri/validate-pyproject
   rev: v0.24.1
   hooks:
