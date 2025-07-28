@@ -1,7 +1,7 @@
 # Important Note
-This repository was a fork from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the 
-work of the developer on this repo. That being said, sadly the state on main has been the case that the code was 
-deleted and there has been no development for a while. Therefore, we intially decided to fork the repository and 
+This repository was a fork from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the
+work of the developer on this repo. That being said, sadly the state on main has been the case that the code was
+deleted and there has been no development for a while. Therefore, we intially decided to fork the repository and
 continue development here, where the community is better able to contribute to and maintain the project. We now changed
 it into a standalone repository.
 
@@ -392,7 +392,7 @@ pixi run pyright
 ```
 
 ### Creating documentation
-We also have a [documentation workflow] (Add link). However, if you want to locally create the documentation 
+We also have a [documentation workflow] (Add link). However, if you want to locally create the documentation
 run the following:
 
 ```shell

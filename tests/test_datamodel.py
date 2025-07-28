@@ -54,7 +54,7 @@ def test_xaxis_attr() -> None:
     assert units.tag == "attr"
     assert units.type is str
     assert units.value == "pixel"
-    assert units.cast == False
+    assert units.cast is False
 
 
 def test_xaxis_data() -> None:
@@ -64,7 +64,7 @@ def test_xaxis_data() -> None:
     assert data.dims == ("x",)
     assert data.dtype == "int"
     assert data.base is None
-    assert data.cast == True
+    assert data.cast is True
 
 
 def test_yaxis_attr() -> None:
@@ -73,7 +73,7 @@ def test_yaxis_attr() -> None:
     assert units.tag == "attr"
     assert units.type is str
     assert units.value == "pixel"
-    assert units.cast == False
+    assert units.cast is False
 
 
 def test_yaxis_data() -> None:
@@ -83,7 +83,7 @@ def test_yaxis_data() -> None:
     assert data.dims == ("y",)
     assert data.dtype == "int"
     assert data.base is None
-    assert data.cast == True
+    assert data.cast is True
 
 
 def test_image_coord() -> None:
@@ -93,7 +93,7 @@ def test_image_coord() -> None:
     assert mask.dims == ("x", "y")
     assert mask.dtype == "bool"
     assert mask.base is None
-    assert mask.cast == True
+    assert mask.cast is True
 
     x = image_model.coords[1]
     assert x.name == "x"
@@ -101,7 +101,7 @@ def test_image_coord() -> None:
     assert x.dims == ("x",)
     assert x.dtype == "int"
     assert x.base is XAxis
-    assert x.cast == True
+    assert x.cast is True
 
     y = image_model.coords[2]
     assert y.name == "y"
@@ -109,7 +109,7 @@ def test_image_coord() -> None:
     assert y.dims == ("y",)
     assert y.dtype == "int"
     assert y.base is YAxis
-    assert y.cast == True
+    assert y.cast is True
 
 
 def test_image_data() -> None:
@@ -119,7 +119,7 @@ def test_image_data() -> None:
     assert data.dims == ("x", "y")
     assert data.dtype == "float"
     assert data.base is None
-    assert data.cast == True
+    assert data.cast is True
 
 
 def test_color_data() -> None:
@@ -129,7 +129,7 @@ def test_color_data() -> None:
     assert red.dims == ("x", "y")
     assert red.dtype == "float"
     assert red.base is Image
-    assert red.cast == True
+    assert red.cast is True
 
     green = color_model.data_vars[1]
     assert green.name == "green"
@@ -137,7 +137,7 @@ def test_color_data() -> None:
     assert green.dims == ("x", "y")
     assert green.dtype == "float"
     assert green.base is Image
-    assert green.cast == True
+    assert green.cast is True
 
     blue = color_model.data_vars[2]
     assert blue.name == "blue"
@@ -145,4 +145,4 @@ def test_color_data() -> None:
     assert blue.dims == ("x", "y")
     assert blue.dtype == "float"
     assert blue.base is Image
-    assert blue.cast == True
+    assert blue.cast is True

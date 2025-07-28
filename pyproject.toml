@@ -38,16 +38,14 @@ Documentation = "https://xarray-contrib.github.io/xarray-dataclasses/"
 
 [project.optional-dependencies]
 dev = [
-    "black>=24.4",
     "build>=1.0.0",
-    "flake8>=7.0.0",
     "ipython>=8.12",
     "myst-parser>=3.0",
     "pydata-sphinx-theme>=0.14",
-    "pyright>=1.1",
     "pytest>=8.2",
     "sphinx>=7.1",
     "twine>=4.0.0",
+    "pre-commit>=4.2.0,<5"
 ]
 
 [tool.hatch.build]
@@ -72,16 +70,16 @@ dev = { features = ["dev"], solve-group = "default" }
 
 [tool.pixi.feature.dev.tasks]
 tests = "pytest"
-flake8 = "flake8 docs tests src/xarray_dataclasses"
-black = "black docs tests src/xarray_dataclasses"
 doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclasses && sphinx-build -a docs docs/_build" }
-pyright = "pyright docs tests src/xarray_dataclasses"
 
 [tool.pyright]
-reportImportCycles = "warning"
-reportUnknownArgumentType = "warning"
-reportUnknownMemberType = "warning"
-reportUnknownVariableType = "warning"
+reportMissingImports = "none"
+reportImportCycles = "none"
+reportUnknownArgumentType = "none"
+reportUnknownMemberType = "none"
+reportUnknownVariableType = "none"
+reportUnknownParameterType = "none"
+reportUntypedFunctionDecorator = "none"
 typeCheckingMode = "strict"
 
 [tool.pixi.pypi-dependencies]

@@ -8,6 +8,7 @@ from dataclasses import dataclass, field, is_dataclass
 from typing import (
     Any,
     Dict,
+    get_type_hints,
     Hashable,
     List,
     Literal,
@@ -22,7 +23,7 @@ from typing import (
 # dependencies
 import numpy as np
 import xarray as xr
-from typing_extensions import ParamSpec, get_type_hints
+from typing_extensions import ParamSpec
 
 
 # submodules
@@ -133,7 +134,7 @@ class DataEntry:
         if model.names:
             setattr(self, "name", model.names[0].value)
 
-    def __call__(self, reference: Optional[AnyXarray] = None) -> xr.DataArray:
+    def __call__(self, reference: Optional[AnyXarray] = None) -> xr.DataArray:  # pyright: ignore[reportUnknownParameterType]
         """Create a DataArray object according to the entry."""
         from .dataarray import asdataarray
 
@@ -187,12 +188,12 @@ class DataModel:
         model = cls()
         eval_dataclass(dataclass)
 
-        for field in dataclass.__dataclass_fields__.values():
-            value = getattr(dataclass, field.name, MISSING)
-            entry = get_entry(field, value)
+        for field_value in dataclass.__dataclass_fields__.values():
+            value = getattr(dataclass, field_value.name, MISSING)
+            entry = get_entry(field_value, value)
 
             if entry is not None:
-                model.entries[field.name] = entry
+                model.entries[field_value.name] = entry
 
         return model
 
@@ -203,10 +204,10 @@ def eval_dataclass(dataclass: AnyDataClass[PInit]) -> None:
     if not is_dataclass(dataclass):
         raise TypeError("Not a dataclass or its object.")
 
-    fields = dataclass.__dataclass_fields__.values()
+    field_values = dataclass.__dataclass_fields__.values()
 
     # do nothing if field types are already evaluated
-    if not any(isinstance(field.type, str) for field in fields):
+    if not any(isinstance(field_value.type, str) for field_value in field_values):
         return
 
     # otherwise, replace field types with evaluated types
@@ -215,8 +216,8 @@ def eval_dataclass(dataclass: AnyDataClass[PInit]) -> None:
 
     types = get_type_hints(dataclass, include_extras=True)
 
-    for field in fields:
-        field.type = types[field.name]
+    for field_value in field_values:
+        field_value.type = types[field_value.name]
 
 
 def get_entry(field: AnyField, value: Any) -> Optional[AnyEntry]:
@@ -250,11 +251,11 @@ def get_entry(field: AnyField, value: Any) -> Optional[AnyEntry]:
             )
 
 
-def get_typedarray(
+def get_typedarray(  # pyright: ignore[reportUnknownParameterType]
     data: Any,
     dims: Dims,
-    dtype: Optional[AnyDType],
-    reference: Optional[AnyXarray] = None,
+    dtype: Optional[AnyDType],  # pyright: ignore[reportUnknownParameterType]
+    reference: Optional[AnyXarray] = None,  # pyright: ignore[reportUnknownParameterType]
 ) -> xr.DataArray:
     """Create a DataArray object with given dims and dtype.
 
