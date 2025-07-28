@@ -10,6 +10,9 @@ authors = [
     {name = "Akio Taniguchi", email = "taniguchi.akio@gmail.com"},
     {name = "Wouter-Michiel Vierdag", email = "michiel.vierdag@scverse.org"}
 ]
+maintainers = [
+  {name = "Wouter-Michiel Vierdag", email = "michiel.vierdag@scverse.org"}
+]
 readme = "README.md"
 license.file = "LICENSE"
 
