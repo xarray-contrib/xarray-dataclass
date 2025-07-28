@@ -38,13 +38,10 @@ Documentation = "https://xarray-contrib.github.io/xarray-dataclasses/"
 
 [project.optional-dependencies]
 dev = [
-    "black>=24.4",
     "build>=1.0.0",
-    "flake8>=7.0.0",
     "ipython>=8.12",
     "myst-parser>=3.0",
     "pydata-sphinx-theme>=0.14",
-    "pyright>=1.1",
     "pytest>=8.2",
     "sphinx>=7.1",
     "twine>=4.0.0",
