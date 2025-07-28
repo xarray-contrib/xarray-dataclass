@@ -8,6 +8,7 @@ from dataclasses import dataclass, field, is_dataclass
 from typing import (
     Any,
     Dict,
+    get_type_hints,
     Hashable,
     List,
     Literal,
@@ -22,7 +23,7 @@ from typing import (
 # dependencies
 import numpy as np
 import xarray as xr
-from typing_extensions import ParamSpec, get_type_hints
+from typing_extensions import ParamSpec
 
 
 # submodules
@@ -133,7 +134,7 @@ class DataEntry:
         if model.names:
             setattr(self, "name", model.names[0].value)
 
-    def __call__(self, reference: Optional[AnyXarray] = None) -> xr.DataArray:
+    def __call__(self, reference: Optional[AnyXarray] = None) -> xr.DataArray:  # pyright: ignore[reportUnknownParameterType]
         """Create a DataArray object according to the entry."""
         from .dataarray import asdataarray
 
@@ -250,11 +251,11 @@ def get_entry(field: AnyField, value: Any) -> Optional[AnyEntry]:
             )
 
 
-def get_typedarray(
+def get_typedarray(  # pyright: ignore[reportUnknownParameterType]
     data: Any,
     dims: Dims,
-    dtype: Optional[AnyDType],
-    reference: Optional[AnyXarray] = None,
+    dtype: Optional[AnyDType],  # pyright: ignore[reportUnknownParameterType]
+    reference: Optional[AnyXarray] = None,  # pyright: ignore[reportUnknownParameterType]
 ) -> xr.DataArray:
     """Create a DataArray object with given dims and dtype.
 

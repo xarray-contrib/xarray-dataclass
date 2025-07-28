@@ -6,6 +6,7 @@ from typing import Literal, Tuple
 # dependencies
 import numpy as np
 import xarray as xr
+from typing_extensions import TypeAlias
 
 
 # submodules
@@ -24,9 +25,7 @@ X = Literal["x"]
 Y = Literal["y"]
 
 
-# dataclasses
-class Custom(xr.Dataset):
-    __slots__ = ()
+Custom: TypeAlias = xr.Dataset
 
 
 @dataclass

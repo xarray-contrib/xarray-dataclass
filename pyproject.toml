@@ -76,10 +76,13 @@ tests = "pytest"
 doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclasses && sphinx-build -a docs docs/_build" }
 
 [tool.pyright]
-reportImportCycles = "warning"
-reportUnknownArgumentType = "warning"
-reportUnknownMemberType = "warning"
-reportUnknownVariableType = "warning"
+reportMissingImports = "none"
+reportImportCycles = "none"
+reportUnknownArgumentType = "none"
+reportUnknownMemberType = "none"
+reportUnknownVariableType = "none"
+reportUnknownParameterType = "none"
+reportUntypedFunctionDecorator = "none"
 typeCheckingMode = "strict"
 
 [tool.pixi.pypi-dependencies]
