@@ -18,4 +18,4 @@ jobs:
           frozen: true
       - name: Test build documentation
         run: |
-          pixi run -e dev gen_doc
+          pixi run -e dev doc_build
