@@ -8,5 +8,4 @@ hidden:
 
 Home <self>
 Package guide <_apidoc/xarray_dataclasses>
-404 <404>
 ```

@@ -46,7 +46,6 @@ html_theme_options = {
         "json_url": "https://xarray-contrib.github.io/xarray-dataclass/versions.json",
         "version_match": version,
     },
-    "navbar_end": ["version-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/xarray-contrib/xarray-dataclass/",
     "twitter_url": "https://x.com/xarray_dev/",
     "show_prev_next": False,
