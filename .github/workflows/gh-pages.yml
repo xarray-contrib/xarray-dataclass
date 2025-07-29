@@ -70,28 +70,6 @@ jobs:
       - name: Copy versions.json to build output
         run: cp docs/versions.json docs/_build/
 
-      - name: Create 404 page for GitHub Pages
-        if: ${{ github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
-        run: |
-          # Create a symlink of the 404.html file in the root directory for GitHub Pages
-          # This ensures that the 404 page is used for all missing pages across all versions
-          cp docs/_build/404.html docs/_build/404.html.bak
-          cat <<EOF > docs/_build/404.html
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta charset="UTF-8">
-              <meta http-equiv="refresh" content="0; url=./latest/404.html">
-              <title>Page Not Found</title>
-            </head>
-            <body>
-              <p>If you are not redirected automatically, follow this <a href="./latest/404.html">link to the 404 page</a>.</p>
-            </body>
-          </html>
-          EOF
-          # Restore the original 404.html in the version directory
-          mv docs/_build/404.html.bak docs/_build/404.html
-
       - name: Create redirect index.html
         if: ${{ github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
         run: |

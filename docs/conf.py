@@ -57,6 +57,7 @@ html_theme_options = {
             "icon": "fa-solid fa-box",
         },
     ],
+    "navbar_start": ["navbar-logo", "version-switcher"],
     "external_links": [
         {"name": "xarray", "url": "https://xarray.pydata.org/"},
     ],
