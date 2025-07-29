@@ -1,9 +1,4 @@
-import os
 from datetime import datetime
-
-# Get version from environment variable or use "dev" as fallback
-version = os.environ.get("DOCS_VERSION", "dev")
-release = version
 
 # Get current year for copyright
 current_year = datetime.now().year
@@ -42,10 +37,6 @@ html_theme_options = {
         "image_light": "logo-light.svg",
         "image_dark": "logo-dark.svg",
     },
-    "switcher": {
-        "json_url": "https://xarray-contrib.github.io/xarray-dataclass/versions.json",
-        "version_match": version,
-    },
     "github_url": "https://github.com/xarray-contrib/xarray-dataclass/",
     "twitter_url": "https://x.com/xarray_dev/",
     "show_prev_next": False,
@@ -56,7 +47,6 @@ html_theme_options = {
             "icon": "fa-solid fa-box",
         },
     ],
-    "navbar_start": ["navbar-logo", "version-switcher"],
     "external_links": [
         {"name": "xarray", "url": "https://xarray.pydata.org/"},
     ],
