@@ -67,7 +67,7 @@ pixi add --pypi xarray-dataclasses
 
 ## Basic usage
 
-xarray-dataclasses uses [the Python's dataclass].
+xarray-dataclass uses [the Python's dataclass].
 Data (or data variables), coordinates, attributes, and a name of DataArray or Dataset objects will be defined as dataclass fields by special type hints (`Data`, `Coord`, `Attr`, `Name`), respectively.
 Note that the following code is supposed in the examples below.
 
@@ -378,25 +378,24 @@ pixi run pre-commit-install
 ```
 
 ### Testing, linting, and formatting
-We have [a test workflow][test-workflow] for testing, static type checking, linting, and formatting the code.
-It is used for status checks when a pull request is created.
-If you would like to check them in local, the following commands are almost equivalent (the difference is that the workflow is run under multiple Python versions).
+We have a test workflow for testing and a pre-commit workflow for static type checking, linting, and formatting the code.
+It is performed when a pull request is created against main.
+If you would like to check them in local, the following commands are almost equivalent (the difference is that the test workflows are run under multiple Python versions).
 Furthermore, these tasks are defined only in the `dev` environment. Pixi does not require you to specify the environment
 in that case.
 
-```shell
+```
 pixi run tests
-pixi run flake8
-pixi run black
-pixi run pyright
+pixi run -e dev pre-commit run --all-files
 ```
 
 ### Creating documentation
-We also have a [documentation workflow] (Add link). However, if you want to locally create the documentation
+We also have a documentation workflow. However, if you want to locally create the documentation
 run the following:
 
 ```shell
-pixi run doc_build
+pixi run doc_build # this just creates the build
+pixi run doc_serve # build and serve at http://localhost:8000/
 ```
 
 ### Create a release

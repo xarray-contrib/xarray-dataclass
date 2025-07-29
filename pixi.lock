@@ -2763,11 +2763,11 @@ packages:
 - pypi: ./
   name: xarray-dataclass
   version: 1.9.1
-  sha256: d6ec499a7d4e75d4ec10071fcd09131a90d7ec7fe0932c20e3728835341a09e8
+  sha256: 5dcef31196310ef30b006bd205732b69c31adf9366518750a677dcd5e5935de7
   requires_dist:
-  - numpy>=2.0.0,<3
-  - typing-extensions>=4.10.0,<5
-  - xarray>=2022.3,<2026
+  - numpy>=2.0.0
+  - typing-extensions>=4.10.0
+  - xarray>=2022.3
   - build>=1.0.0 ; extra == 'dev'
   - ipython>=8.12 ; extra == 'dev'
   - myst-parser>=3.0 ; extra == 'dev'
@@ -2776,7 +2776,7 @@ packages:
   - pytest>=8.2 ; extra == 'dev'
   - sphinx>=7.1 ; extra == 'dev'
   - twine>=4.0.0 ; extra == 'dev'
-  requires_python: '>=3.9,<3.14'
+  requires_python: '>=3.9'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/xz-5.8.1-hbcc6ac9_2.conda
   sha256: 802725371682ea06053971db5b4fb7fbbcaee9cb1804ec688f55e51d74660617

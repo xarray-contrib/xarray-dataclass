@@ -1,6 +1,12 @@
+from datetime import datetime
+
+# Get current year for copyright
+current_year = datetime.now().year
+
 # project information
-author = "Akio Taniguchi"
-copyright = "2020-2024 Akio Taniguchi"
+project = "xarray-dataclass"
+author = "Wouter-Michiel Vierdag"
+copyright = f"{current_year} Wouter-Michiel Vierdag"
 
 
 # general configuration
@@ -31,6 +37,17 @@ html_theme_options = {
         "image_light": "logo-light.svg",
         "image_dark": "logo-dark.svg",
     },
-    "github_url": "https://github.com/astropenguin/xarray-dataclasses/",
-    "twitter_url": "https://twitter.com/astropengu_in/",
+    "github_url": "https://github.com/xarray-contrib/xarray-dataclass/",
+    "twitter_url": "https://x.com/xarray_dev/",
+    "show_prev_next": False,
+    "icon_links": [
+        {
+            "name": "PyPI",
+            "url": "https://pypi.org/project/xarray-dataclass/",
+            "icon": "fa-solid fa-box",
+        },
+    ],
+    "external_links": [
+        {"name": "xarray", "url": "https://xarray.pydata.org/"},
+    ],
 }
