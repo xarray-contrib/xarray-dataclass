@@ -27,11 +27,11 @@ classifiers = [
 ]
 keywords = ["xarray", "dataclass", "dataarray", "dataset", "typing"]
 
-requires-python = ">=3.9, <3.14"
+requires-python = ">=3.9"
 dependencies = [
-    "numpy >=2.0.0,<3",
-    "xarray >=2022.3,<2026",
-    "typing-extensions>=4.10.0,<5"]
+    "numpy >=2.0.0",
+    "xarray >=2022.3",
+    "typing-extensions>=4.10.0"]
 
 [project.urls]
 Homepage = "https://github.com/xarray-contrib/xarray-dataclasses/"
