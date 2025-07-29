@@ -5,46 +5,114 @@ on:
     types: [created]
   pull_request:
     branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper versioning
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+
       - name: Install dependencies
         run: pip install -e ".[dev]"
+
+      - name: Determine version and build type
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            echo "VERSION=stable" >> $GITHUB_OUTPUT
+            echo "DIR=stable" >> $GITHUB_OUTPUT
+            echo "TAG=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "VERSION=latest" >> $GITHUB_OUTPUT
+            echo "DIR=latest" >> $GITHUB_OUTPUT
+            echo "TAG=main" >> $GITHUB_OUTPUT
+          else
+            echo "VERSION=latest" >> $GITHUB_OUTPUT
+            echo "DIR=latest" >> $GITHUB_OUTPUT
+            echo "TAG=pr-${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Generate versions.json
         run: |
+          # Create a more comprehensive versions.json
           cat <<EOF > docs/versions.json
           [
             {
               "version": "latest",
-              "url": "/xarray-dataclass/latest/"
+              "url": "https://xarray-contrib.github.io/xarray-dataclass/latest/",
+              "name": "latest"
             },
             {
               "version": "stable",
-              "url": "/xarray-dataclass/stable/"
+              "url": "https://xarray-contrib.github.io/xarray-dataclass/stable/",
+              "name": "stable"
             }
           ]
           EOF
+
       - name: Build docs
         run: |
-          # Set DOCS_VERSION env var according to event
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            export DOCS_VERSION=stable
-          else
-            export DOCS_VERSION=latest
-          fi
+          # Set DOCS_VERSION env var according to determined version
+          export DOCS_VERSION=${{ steps.version.outputs.VERSION }}
+          echo "Building documentation for version: $DOCS_VERSION"
 
+          # Build the documentation
           python -m sphinx -b html docs docs/_build
+
       - name: Copy versions.json to build output
         run: cp docs/versions.json docs/_build/
+
+      - name: Create 404 page for GitHub Pages
+        if: ${{ github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
+        run: |
+          # Create a symlink of the 404.html file in the root directory for GitHub Pages
+          # This ensures that the 404 page is used for all missing pages across all versions
+          cp docs/_build/404.html docs/_build/404.html.bak
+          cat <<EOF > docs/_build/404.html
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="UTF-8">
+              <meta http-equiv="refresh" content="0; url=./latest/404.html">
+              <title>Page Not Found</title>
+            </head>
+            <body>
+              <p>If you are not redirected automatically, follow this <a href="./latest/404.html">link to the 404 page</a>.</p>
+            </body>
+          </html>
+          EOF
+          # Restore the original 404.html in the version directory
+          mv docs/_build/404.html.bak docs/_build/404.html
+
+      - name: Create redirect index.html
+        if: ${{ github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
+        run: |
+          # Create a root index.html that redirects to the stable version (or latest if no stable exists)
+          cat <<EOF > docs/_build/index.html
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="UTF-8">
+              <meta http-equiv="refresh" content="0; url=./${{ steps.version.outputs.DIR }}/">
+              <title>Redirect to ${{ steps.version.outputs.VERSION }} documentation</title>
+            </head>
+            <body>
+              <p>If you are not redirected automatically, follow this <a href="./${{ steps.version.outputs.DIR }}/">link to the ${{ steps.version.outputs.VERSION }} documentation</a>.</p>
+            </body>
+          </html>
+          EOF
+
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/_build
-          destination_dir: ${{ github.event_name == 'release' && 'stable' || 'latest' }}
+          destination_dir: ${{ steps.version.outputs.DIR }}

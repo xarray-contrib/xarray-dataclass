@@ -1,11 +1,17 @@
 import os
+from datetime import datetime
 
-version = os.environ.get("DOCS_VERSION", "unknown")
+# Get version from environment variable or use "dev" as fallback
+version = os.environ.get("DOCS_VERSION", "dev")
 release = version
 
+# Get current year for copyright
+current_year = datetime.now().year
+
 # project information
+project = "xarray-dataclass"
 author = "Wouter-Michiel Vierdag"
-copyright = "2025 Wouter-Michiel Vierdag"
+copyright = f"{current_year} Wouter-Michiel Vierdag"
 
 
 # general configuration
@@ -43,4 +49,16 @@ html_theme_options = {
     "navbar_end": ["version-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/xarray-contrib/xarray-dataclass/",
     "twitter_url": "https://x.com/xarray_dev/",
+    "use_edit_page_button": True,
+    "show_prev_next": False,
+    "icon_links": [
+        {
+            "name": "PyPI",
+            "url": "https://pypi.org/project/xarray-dataclass/",
+            "icon": "fa-solid fa-box",
+        },
+    ],
+    "external_links": [
+        {"name": "xarray", "url": "https://xarray.pydata.org/"},
+    ],
 }
