@@ -14,15 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch all history for proper versioning
-
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
-
+          python-version: "3.11"
       - name: Install dependencies
         run: pip install -e ".[dev]"
-
       - name: Determine version and build type
         id: version
         run: |
@@ -35,14 +32,12 @@ jobs:
             echo "DIR=latest" >> $GITHUB_OUTPUT
             echo "TAG=main" >> $GITHUB_OUTPUT
           else
-            echo "VERSION=latest" >> $GITHUB_OUTPUT
-            echo "DIR=latest" >> $GITHUB_OUTPUT
+            echo "VERSION=preview" >> $GITHUB_OUTPUT
+            echo "DIR=preview-${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
             echo "TAG=pr-${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
           fi
-
       - name: Generate versions.json
         run: |
-          # Create a more comprehensive versions.json
           cat <<EOF > docs/versions.json
           [
             {
@@ -57,23 +52,17 @@ jobs:
             }
           ]
           EOF
-
-      - name: Build docs
+      - name: Build documentation
+        env:
+          DOCS_VERSION: ${{ steps.version.outputs.VERSION }}
         run: |
-          # Set DOCS_VERSION env var according to determined version
-          export DOCS_VERSION=${{ steps.version.outputs.VERSION }}
-          echo "Building documentation for version: $DOCS_VERSION"
-
-          # Build the documentation
-          python -m sphinx -b html docs docs/_build
-
-      - name: Copy versions.json to build output
-        run: cp docs/versions.json docs/_build/
-
+          python -m sphinx -b html docs docs/_build/${{ steps.version.outputs.DIR }}
+      - name: Copy versions.json
+        run: cp docs/versions.json docs/_build/${{ steps.version.outputs.DIR }}/
       - name: Create redirect index.html
         if: ${{ github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
         run: |
-          # Create a root index.html that redirects to the stable version (or latest if no stable exists)
+          mkdir -p docs/_build
           cat <<EOF > docs/_build/index.html
           <!DOCTYPE html>
           <html>
@@ -87,10 +76,9 @@ jobs:
             </body>
           </html>
           EOF
-
-      - name: Deploy docs
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/_build
-          destination_dir: ${{ steps.version.outputs.DIR }}
+          destination_dir: .
