@@ -49,7 +49,6 @@ html_theme_options = {
     "navbar_end": ["version-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/xarray-contrib/xarray-dataclass/",
     "twitter_url": "https://x.com/xarray_dev/",
-    "use_edit_page_button": True,
     "show_prev_next": False,
     "icon_links": [
         {
