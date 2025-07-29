@@ -1,6 +1,11 @@
+import os
+
+version = os.environ.get("DOCS_VERSION", "unknown")
+release = version
+
 # project information
-author = "Akio Taniguchi"
-copyright = "2020-2024 Akio Taniguchi"
+author = "Wouter-Michiel Vierdag"
+copyright = "2025 Wouter-Michiel Vierdag"
 
 
 # general configuration
@@ -31,6 +36,10 @@ html_theme_options = {
         "image_light": "logo-light.svg",
         "image_dark": "logo-dark.svg",
     },
-    "github_url": "https://github.com/astropenguin/xarray-dataclasses/",
-    "twitter_url": "https://twitter.com/astropengu_in/",
+    "switcher": {
+        "json_url": "https://xarray-contrib.github.io/xarray-dataclass/versions.json",
+        "version_match": version,
+    },
+    "github_url": "https://github.com/xarray-contrib/xarray-dataclass/",
+    "twitter_url": "https://x.com/xarray_dev/",
 }

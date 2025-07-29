@@ -1,26 +1,50 @@
-name: GitHub Pages
+name: Deploy Docs
 
 on:
   release:
-    types:
-      - created
+    types: [created]
+  pull_request:
+    branches: [main]
 
 jobs:
-  job:
-    name: GitHub Pages
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Install project dependencies
+      - name: Install dependencies
         run: pip install -e ".[dev]"
+      - name: Generate versions.json
+        run: |
+          cat <<EOF > docs/versions.json
+          [
+            {
+              "version": "latest",
+              "url": "/xarray-dataclass/latest/"
+            },
+            {
+              "version": "stable",
+              "url": "/xarray-dataclass/stable/"
+            }
+          ]
+          EOF
       - name: Build docs
-        run: python -m sphinx -b html docs docs/_build
+        run: |
+          # Set DOCS_VERSION env var according to event
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            export DOCS_VERSION=stable
+          else
+            export DOCS_VERSION=latest
+          fi
+
+          python -m sphinx -b html docs docs/_build
+      - name: Copy versions.json to build output
+        run: cp docs/versions.json docs/_build/
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3
         with:
-          force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/_build
+          destination_dir: ${{ github.event_name == 'release' && 'stable' || 'latest' }}
