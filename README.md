@@ -3,9 +3,8 @@
 [![Release](https://img.shields.io/pypi/v/xarray-dataclass?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
 [![Python](https://img.shields.io/pypi/pyversions/xarray-dataclass?label=Python&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
 [![Downloads](https://img.shields.io/pypi/dm/xarray-dataclass?label=Downloads&color=cornflowerblue&style=flat-square)](https://pepy.tech/project/xarray-dataclass)
-[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.4624819-cornflowerblue?style=flat-square)](https://doi.org/10.5281/zenodo.4624819)
+[![DOI](https://zenodo.org/badge/945912243.svg)](https://doi.org/10.5281/zenodo.16604747)
 [![Tests](https://img.shields.io/github/actions/workflow/status/xarray-contrib/xarray-dataclass/tests.yml?label=Tests&style=flat-square)](https://github.com/xarray-contrib/xarray-dataclass/actions/workflows/tests.yaml)
-[![Release](https://img.shields.io/pypi/v/xarray-dataclass?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
 
 xarray data creation by data classes
 
