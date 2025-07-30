@@ -41,14 +41,11 @@ Documentation = "https://xarray-contrib.github.io/xarray-dataclasses/"
 
 [project.optional-dependencies]
 dev = [
-    "build>=1.0.0",
-    "ipython>=8.12",
     "myst-parser>=3.0",
     "pydata-sphinx-theme>=0.14",
     "pytest>=8.2",
     "sphinx>=7.1",
-    "twine>=4.0.0",
-    "pre-commit>=4.2.0,<5"
+    "pre-commit>=4.2.0"
 ]
 
 [tool.hatch.build]
