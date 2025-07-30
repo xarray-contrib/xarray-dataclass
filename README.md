@@ -1,9 +1,4 @@
-
-This repository is adapted from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the
-work of the developer on this repo. Sadly, that repository is inactive. Thus, a fork was moved here in order to allow
-for more visibility and community maintenance.
-
-# xarray-dataclasses
+# xarray-dataclass
 
 [![Release](https://img.shields.io/pypi/v/xarray-dataclass?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
 [![Python](https://img.shields.io/pypi/pyversions/xarray-dataclass?label=Python&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
@@ -14,9 +9,13 @@ for more visibility and community maintenance.
 
 xarray data creation by data classes
 
+This repository is adapted from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the
+work of the developer on this repo. Sadly, that repository is inactive. Thus, a fork was moved here in order to allow
+for more visibility and community maintenance.
+
 ## Overview
 
-xarray-dataclasses is a Python package that makes it easy to create [xarray]'s DataArray and Dataset objects that are "typed" (i.e. fixed dimensions, data type, coordinates, attributes, and name) using [the Python's dataclass]:
+xarray-dataclass is a Python package that makes it easy to create [xarray]'s DataArray and Dataset objects that are "typed" (i.e. fixed dimensions, data type, coordinates, attributes, and name) using [the Python's dataclass]:
 
 ```python
 from dataclasses import dataclass
@@ -52,7 +51,7 @@ class Image(AsDataArray):
 
 ### Installation
 
-There are multiple ways you can install xarray-dataclasses, dependent on what kind of dependency manager you use.
+There are multiple ways you can install xarray-dataclass, dependent on what kind of dependency manager you use.
 
 ```shell
 pip install xarray-dataclass
@@ -327,7 +326,7 @@ image.custom_method()  # True
 
 ### DataArray and Dataset creation without shorthands
 
-xarray-dataclasses provides functions, `asdataarray` and `asdataset`.
+xarray-dataclass provides functions, `asdataarray` and `asdataset`.
 This is useful when users do not want to inherit the mix-in class (`AsDataArray` or `AsDataset`) in a DataArray or Dataset dataclass.
 For example:
 
@@ -349,7 +348,7 @@ image = asdataarray(Image([[0, 1], [2, 3]], [0, 1], [0, 1]))
 
 ## How to contribute
 
-Thank you for being willing to contribute! If you have some ideas to propose, please open an [issue](https://github.com/xarray-contrib/xarray-dataclasses/issues).
+Thank you for being willing to contribute! If you have some ideas to propose, please open an [issue](https://github.com/xarray-contrib/xarray-dataclass/issues).
 We use [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) for developing and managing the project.
 The first section describes how to contribute with it.
 The second and third sections explain how to prepare a local development environment and our automated workflows in GitHub Actions, respectively.
@@ -358,8 +357,8 @@ The second and third sections explain how to prepare a local development environ
 ### Get the source code
 
 ```shell
-git clone https://github.com/xarray-contrib/xarray-dataclasses
-cd xarray-dataclasses
+git clone https://github.com/xarray-contrib/xarray-dataclass
+cd xarray-dataclass
 ```
 
 ### Install dependencies
