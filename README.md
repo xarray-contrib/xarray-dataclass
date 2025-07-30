@@ -367,7 +367,7 @@ First install [pixi](https://pixi.sh/latest/installation/). Then, install projec
 
 ```shell
 pixi install -a
-pixi run -e dev pre-commit-install
+pixi run -e dev pre-commit install
 ```
 
 ### Testing, linting, and formatting
@@ -397,8 +397,8 @@ This section is relevant only for maintainers.
 
 1. Pull `git`'s `main` branch.
 2. `pixi install -a`
-3. `pixi run pre-commit-install`
-4. `pixi run -e test test`
+3. `pixi run -e dev pre-commit install`
+4. `pixi run tests`
 5. `pixi shell`
 6. `hatch version <new-version>`
 7. `git add .`
