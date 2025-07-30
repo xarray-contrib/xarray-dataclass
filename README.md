@@ -1,20 +1,16 @@
-# Important Note
-This repository was a fork from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the
-work of the developer on this repo. That being said, sadly the state on main has been the case that the code was
-deleted and there has been no development for a while. Therefore, we intially decided to fork the repository and
-continue development here, where the community is better able to contribute to and maintain the project. We now changed
-it into a standalone repository.
 
-Note, the repository is not yet released. We are making some additional changes before release.
+This repository is adapted from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the
+work of the developer on this repo. Sadly, that repository is inactive. Thus, a fork was moved here in order to allow
+for more visibility and community maintenance.
 
 # xarray-dataclasses
 
-[![Release](https://img.shields.io/pypi/v/xarray-dataclasses?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclasses/)
-[![Python](https://img.shields.io/pypi/pyversions/xarray-dataclasses?label=Python&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclasses/)
-[![Downloads](https://img.shields.io/pypi/dm/xarray-dataclasses?label=Downloads&color=cornflowerblue&style=flat-square)](https://pepy.tech/project/xarray-dataclasses)
+[![Release](https://img.shields.io/pypi/v/xarray-dataclass?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
+[![Python](https://img.shields.io/pypi/pyversions/xarray-dataclass?label=Python&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
+[![Downloads](https://img.shields.io/pypi/dm/xarray-dataclass?label=Downloads&color=cornflowerblue&style=flat-square)](https://pepy.tech/project/xarray-dataclass)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.4624819-cornflowerblue?style=flat-square)](https://doi.org/10.5281/zenodo.4624819)
-[![Tests](https://img.shields.io/github/actions/workflow/status/astropenguin/xarray-dataclasses/tests.yml?label=Tests&style=flat-square)](https://github.com/astropenguin/xarray-dataclasses/actions/workflows/tests.yaml)
-[![Release](https://github.com/melonora/xarray-dataclasses/actions/workflows/pypi.yaml/badge.svg?event=release)](https://github.com/melonora/xarray-dataclasses/actions/workflows/pypi.yaml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/xarray-contrib/xarray-dataclass/tests.yml?label=Tests&style=flat-square)](https://github.com/xarray-contrib/xarray-dataclass/actions/workflows/tests.yaml)
+[![Release](https://img.shields.io/pypi/v/xarray-dataclass?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
 
 xarray data creation by data classes
 
@@ -374,7 +370,7 @@ First install [pixi](https://pixi.sh/latest/installation/). Then, install projec
 
 ```shell
 pixi install -a
-pixi run pre-commit-install
+pixi run -e dev pre-commit-install
 ```
 
 ### Testing, linting, and formatting
@@ -386,7 +382,7 @@ in that case.
 
 ```
 pixi run tests
-pixi run -e dev pre-commit run --all-files
+pixi run precommit # This runs pre-commit on all files.
 ```
 
 ### Creating documentation

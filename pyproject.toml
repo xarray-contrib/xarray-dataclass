@@ -75,6 +75,7 @@ dev = { features = ["dev"], solve-group = "default" }
 tests = "pytest"
 doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclasses && sphinx-build -a docs docs/_build" }
 doc_serve = { cmd = "sphinx-build -a docs docs/_build && python -m http.server --directory docs/_build 8000" }
+precommit = { cmd = "pre-commit run --all-files"}
 
 [tool.pyright]
 reportMissingImports = "none"
