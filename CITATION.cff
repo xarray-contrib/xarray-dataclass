@@ -3,7 +3,7 @@ message: "If you use this software, please cite it as below."
 
 title: "xarray-dataclass"
 abstract: "xarray data creation by data classes"
-version: 2.0.0
+version: 3.0.0
 date-released: 2025-07-30
 license: "MIT"
 doi: "10.5281/zenodo.16604747"
