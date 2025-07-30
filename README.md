@@ -55,10 +55,8 @@ class Image(AsDataArray):
 There are multiple ways you can install xarray-dataclasses, dependent on what kind of dependency manager you use.
 
 ```shell
-pip install xarray-dataclasses
-conda install -c conda-forge xarray-dataclasses
-pixi add xarray-dataclasses
-pixi add --pypi xarray-dataclasses
+pip install xarray-dataclass
+pixi add --pypi xarray-dataclass
 ```
 
 ## Basic usage
