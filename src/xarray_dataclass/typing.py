@@ -5,9 +5,9 @@ Note:
 
         from dataclasses import dataclass
         from typing import Literal
-        from xarray_dataclasses import AsDataArray, AsDataset
-        from xarray_dataclasses import Attr, Coord, Data, Name
-        from xarray_dataclasses import Coordof, Dataof
+        from xarray_dataclass import AsDataArray, AsDataset
+        from xarray_dataclass import Attr, Coord, Data, Name
+        from xarray_dataclass import Coordof, Dataof
 
 
         X = Literal["x"]

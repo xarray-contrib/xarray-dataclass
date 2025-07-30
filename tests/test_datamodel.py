@@ -4,8 +4,8 @@ from typing import Literal, Tuple
 
 
 # submodules
-from xarray_dataclasses.datamodel import DataModel
-from xarray_dataclasses.typing import Attr, Coord, Coordof, Data, Dataof
+from xarray_dataclass.datamodel import DataModel
+from xarray_dataclass.typing import Attr, Coord, Coordof, Data, Dataof
 
 
 # type hints

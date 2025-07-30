@@ -34,9 +34,9 @@ dependencies = [
     "typing-extensions >=4.10.0"]
 
 [project.urls]
-Homepage = "https://github.com/xarray-contrib/xarray-dataclasses/"
-Repository = "https://github.com/xarray-contrib/xarray-dataclasses/"
-Documentation = "https://xarray-contrib.github.io/xarray-dataclasses/"
+Homepage = "https://github.com/xarray-contrib/xarray-dataclass/"
+Repository = "https://github.com/xarray-contrib/xarray-dataclass/"
+Documentation = "https://xarray-contrib.github.io/xarray-dataclass/"
 
 
 [project.optional-dependencies]
@@ -55,10 +55,10 @@ include = [
 ]
 
 [tool.hatch.version]
-path = "src/xarray_dataclasses/__about__.py"
+path = "src/xarray_dataclass/__about__.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/xarray_dataclasses"]
+packages = ["src/xarray_dataclass"]
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -70,7 +70,7 @@ dev = { features = ["dev"], solve-group = "default" }
 
 [tool.pixi.feature.dev.tasks]
 tests = "pytest"
-doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclasses && sphinx-build -a docs docs/_build" }
+doc_build = { cmd = "sphinx-apidoc -efT -o docs/_apidoc src/xarray_dataclass && sphinx-build -a docs docs/_build" }
 doc_serve = { cmd = "sphinx-build -a docs docs/_build && python -m http.server --directory docs/_build 8000" }
 precommit = { cmd = "pre-commit run --all-files"}
 
@@ -84,8 +84,6 @@ reportUnknownParameterType = "none"
 reportUntypedFunctionDecorator = "none"
 typeCheckingMode = "strict"
 
-[tool.pixi.pypi-dependencies]
-xarray-dataclass = { path = ".", editable = true }
 
 [tool.pixi.dependencies]
 # Allows to specify the pixi conda executable to be able to set the python interpreter.

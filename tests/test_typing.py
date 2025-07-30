@@ -9,7 +9,7 @@ from typing_extensions import Annotated as Ann
 
 
 # submodules
-from xarray_dataclasses.typing import (
+from xarray_dataclass.typing import (
     Attr,
     Coord,
     Data,

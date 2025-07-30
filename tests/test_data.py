@@ -6,7 +6,7 @@ from typing import Collection, Literal as L, Tuple, Union
 # dependencies
 import numpy as np
 from typing_extensions import Annotated as Ann
-from xarray_dataclasses.typing import Attr, Coord, Coordof, Data
+from xarray_dataclass.typing import Attr, Coord, Coordof, Data
 
 
 # type hints
