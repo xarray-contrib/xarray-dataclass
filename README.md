@@ -19,7 +19,7 @@ xarray-dataclass is a Python package that makes it easy to create [xarray]'s Dat
 ```python
 from dataclasses import dataclass
 from typing import Literal
-from xarray_dataclasses import AsDataArray, Coord, Data
+from xarray_dataclass import AsDataArray, Coord, Data
 
 
 X = Literal["x"]
@@ -66,8 +66,8 @@ Note that the following code is supposed in the examples below.
 ```python
 from dataclasses import dataclass
 from typing import Literal
-from xarray_dataclasses import AsDataArray, AsDataset
-from xarray_dataclasses import Attr, Coord, Data, Name
+from xarray_dataclass import AsDataArray, AsDataset
+from xarray_dataclass import Attr, Coord, Data, Name
 
 
 X = Literal["x"]
@@ -203,13 +203,13 @@ Attributes:
 
 ### Coordof and Dataof type hints
 
-xarray-dataclasses provides advanced type hints, `Coordof` and `Dataof`.
+xarray-dataclass provides advanced type hints, `Coordof` and `Dataof`.
 Unlike `Data` and `Coord`, they specify a dataclass that defines a DataArray class.
 This is useful when users want to add metadata to dimensions for [plotting].
 For example:
 
 ```python
-from xarray_dataclasses import Coordof
+from xarray_dataclass import Coordof
 
 
 @dataclass
@@ -294,7 +294,7 @@ A custom factory for DataArray or Dataset creation is only supported in the curr
 
 ```python
 import xarray as xr
-from xarray_dataclasses import DataOptions
+from xarray_dataclass import DataOptions
 
 
 class Custom(xr.DataArray):
@@ -330,7 +330,7 @@ This is useful when users do not want to inherit the mix-in class (`AsDataArray`
 For example:
 
 ```python
-from xarray_dataclasses import asdataarray
+from xarray_dataclass import asdataarray
 
 
 @dataclass
