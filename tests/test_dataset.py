@@ -10,10 +10,10 @@ from typing_extensions import TypeAlias
 
 
 # submodules
-from xarray_dataclasses.dataarray import AsDataArray
-from xarray_dataclasses.dataset import AsDataset
-from xarray_dataclasses.dataoptions import DataOptions
-from xarray_dataclasses.typing import Attr, Coord, Data
+from xarray_dataclass.dataarray import AsDataArray
+from xarray_dataclass.dataset import AsDataset
+from xarray_dataclass.dataoptions import DataOptions
+from xarray_dataclass.typing import Attr, Coord, Data
 
 # constants
 DIMS = "x", "y"
