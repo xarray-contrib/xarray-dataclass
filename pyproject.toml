@@ -88,3 +88,6 @@ typeCheckingMode = "strict"
 [tool.pixi.dependencies]
 # Allows to specify the pixi conda executable to be able to set the python interpreter.
 pixi-pycharm = ">=0.0.8,<0.0.9"
+
+[tool.pixi.pypi-dependencies]
+xarray-dataclass = { path = ".", editable = true }
