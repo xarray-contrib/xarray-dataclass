@@ -1,0 +1,7 @@
+xarray\_dataclass.typing module
+===============================
+
+.. automodule:: xarray_dataclass.typing
+   :members:
+   :show-inheritance:
+   :undoc-members:
