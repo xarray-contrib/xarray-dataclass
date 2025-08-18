@@ -2,19 +2,19 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
     -   id: check-added-large-files
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.12.5
+  rev: v0.12.9
   hooks:
     - id: ruff-check
       args: [--fix]        # optional, to autofix lint errors
     - id: ruff-format
 - repo: https://github.com/fsouza/mirrors-pyright
-  rev: v1.1.403
+  rev: v1.1.275
   hooks:
     - id: pyright
 - repo: https://github.com/abravalheri/validate-pyproject
