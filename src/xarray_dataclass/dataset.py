@@ -7,12 +7,20 @@ __all__ = ["AsDataset", "asdataset"]
 from functools import partial
 from inspect import signature
 from types import MethodType
-from typing import Any, Callable, Dict, Optional, Protocol, Type, TypeVar, overload
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Optional,
+    Protocol,
+    Type,
+    TYPE_CHECKING,
+    TypeVar,
+    overload,
+)
 
 
 # dependencies
-import numpy as np
-import xarray as xr
 from typing_extensions import ParamSpec
 
 
@@ -20,11 +28,20 @@ from typing_extensions import ParamSpec
 from .datamodel import DataModel
 from .dataoptions import DataOptions
 from .typing import AnyArray, AnyXarray, DataClass, Order, Shape, Sizes
+from .util import lazy_import
+
+# lazy imports of large modules
+if TYPE_CHECKING:
+    import numpy as np
+    import xarray as xr
+else:
+    numpy = lazy_import("xarray")
+    xr = lazy_import("xarray")
 
 
 # type hints
 PInit = ParamSpec("PInit")
-TDataset = TypeVar("TDataset", bound=xr.Dataset)
+TDataset = TypeVar("TDataset", bound="xr.Dataset")
 
 
 class OptionedClass(DataClass[PInit], Protocol[PInit, TDataset]):
@@ -34,28 +51,28 @@ class OptionedClass(DataClass[PInit], Protocol[PInit, TDataset]):
 
 
 # runtime functions and classes
-@overload
-def asdataset(
-    dataclass: OptionedClass[PInit, TDataset],
-    reference: Optional[AnyXarray] = None,
-    dataoptions: None = None,
-) -> TDataset: ...
+if TYPE_CHECKING:
 
+    @overload
+    def asdataset(
+        dataclass: OptionedClass[PInit, TDataset],
+        reference: Optional[AnyXarray] = None,
+        dataoptions: None = None,
+    ) -> TDataset: ...
 
-@overload
-def asdataset(
-    dataclass: DataClass[PInit],
-    reference: Optional[AnyXarray] = None,
-    dataoptions: None = None,
-) -> xr.Dataset: ...
+    @overload
+    def asdataset(
+        dataclass: DataClass[PInit],
+        reference: Optional[AnyXarray] = None,
+        dataoptions: None = None,
+    ) -> xr.Dataset: ...
 
-
-@overload
-def asdataset(
-    dataclass: Any,
-    reference: Optional[AnyXarray] = None,
-    dataoptions: DataOptions[TDataset] = DataOptions(xr.Dataset),
-) -> TDataset: ...
+    @overload
+    def asdataset(
+        dataclass: Any,
+        reference: Optional[AnyXarray] = None,
+        dataoptions: DataOptions[TDataset] = DataOptions(xr.Dataset),
+    ) -> TDataset: ...
 
 
 def asdataset(
@@ -112,19 +129,21 @@ class classproperty:
     def __init__(self, func: Callable[..., Any]) -> None:
         self.__func__ = func
 
-    @overload
-    def __get__(
-        self,
-        obj: Any,
-        cls: Type[OptionedClass[PInit, TDataset]],
-    ) -> Callable[PInit, TDataset]: ...
+    if TYPE_CHECKING:
 
-    @overload
-    def __get__(
-        self,
-        obj: Any,
-        cls: Type[DataClass[PInit]],
-    ) -> Callable[PInit, xr.Dataset]: ...
+        @overload
+        def __get__(
+            self,
+            obj: Any,
+            cls: Type[OptionedClass[PInit, TDataset]],
+        ) -> Callable[PInit, TDataset]: ...
+
+        @overload
+        def __get__(
+            self,
+            obj: Any,
+            cls: Type[DataClass[PInit]],
+        ) -> Callable[PInit, xr.Dataset]: ...
 
     def __get__(self, obj: Any, cls: Any) -> Any:
         return self.__func__(cls)
@@ -147,23 +166,25 @@ class AsDataset:
         setattr(new, "__signature__", sig)
         return MethodType(new, cls)
 
-    @overload
-    @classmethod
-    def shaped(
-        cls: Type[OptionedClass[PInit, TDataset]],
-        func: Callable[[Shape], AnyArray],
-        sizes: Sizes,
-        **kwargs: Any,
-    ) -> TDataset: ...
+    if TYPE_CHECKING:
 
-    @overload
-    @classmethod
-    def shaped(
-        cls: Type[DataClass[PInit]],
-        func: Callable[[Shape], AnyArray],
-        sizes: Sizes,
-        **kwargs: Any,
-    ) -> xr.Dataset: ...
+        @overload
+        @classmethod
+        def shaped(
+            cls: Type[OptionedClass[PInit, TDataset]],
+            func: Callable[[Shape], AnyArray],
+            sizes: Sizes,
+            **kwargs: Any,
+        ) -> TDataset: ...
+
+        @overload
+        @classmethod
+        def shaped(
+            cls: Type[DataClass[PInit]],
+            func: Callable[[Shape], AnyArray],
+            sizes: Sizes,
+            **kwargs: Any,
+        ) -> xr.Dataset: ...
 
     @classmethod
     def shaped(
@@ -192,23 +213,25 @@ class AsDataset:
 
         return asdataset(cls(**data_vars, **kwargs))
 
-    @overload
-    @classmethod
-    def empty(
-        cls: Type[OptionedClass[PInit, TDataset]],
-        sizes: Sizes,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> TDataset: ...
+    if TYPE_CHECKING:
 
-    @overload
-    @classmethod
-    def empty(
-        cls: Type[DataClass[PInit]],
-        sizes: Sizes,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> xr.Dataset: ...
+        @overload
+        @classmethod
+        def empty(
+            cls: Type[OptionedClass[PInit, TDataset]],
+            sizes: Sizes,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> TDataset: ...
+
+        @overload
+        @classmethod
+        def empty(
+            cls: Type[DataClass[PInit]],
+            sizes: Sizes,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> xr.Dataset: ...
 
     @classmethod
     def empty(
@@ -232,23 +255,25 @@ class AsDataset:
         func = partial(np.empty, order=order)
         return cls.shaped(func, sizes, **kwargs)
 
-    @overload
-    @classmethod
-    def zeros(
-        cls: Type[OptionedClass[PInit, TDataset]],
-        sizes: Sizes,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> TDataset: ...
+    if TYPE_CHECKING:
 
-    @overload
-    @classmethod
-    def zeros(
-        cls: Type[DataClass[PInit]],
-        sizes: Sizes,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> xr.Dataset: ...
+        @overload
+        @classmethod
+        def zeros(
+            cls: Type[OptionedClass[PInit, TDataset]],
+            sizes: Sizes,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> TDataset: ...
+
+        @overload
+        @classmethod
+        def zeros(
+            cls: Type[DataClass[PInit]],
+            sizes: Sizes,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> xr.Dataset: ...
 
     @classmethod
     def zeros(
@@ -272,23 +297,25 @@ class AsDataset:
         func = partial(np.zeros, order=order)
         return cls.shaped(func, sizes, **kwargs)
 
-    @overload
-    @classmethod
-    def ones(
-        cls: Type[OptionedClass[PInit, TDataset]],
-        sizes: Sizes,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> TDataset: ...
+    if TYPE_CHECKING:
 
-    @overload
-    @classmethod
-    def ones(
-        cls: Type[DataClass[PInit]],
-        sizes: Sizes,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> xr.Dataset: ...
+        @overload
+        @classmethod
+        def ones(
+            cls: Type[OptionedClass[PInit, TDataset]],
+            sizes: Sizes,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> TDataset: ...
+
+        @overload
+        @classmethod
+        def ones(
+            cls: Type[DataClass[PInit]],
+            sizes: Sizes,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> xr.Dataset: ...
 
     @classmethod
     def ones(
@@ -312,25 +339,27 @@ class AsDataset:
         func = partial(np.ones, order=order)
         return cls.shaped(func, sizes, **kwargs)
 
-    @overload
-    @classmethod
-    def full(
-        cls: Type[OptionedClass[PInit, TDataset]],
-        sizes: Sizes,
-        fill_value: Any,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> TDataset: ...
+    if TYPE_CHECKING:
 
-    @overload
-    @classmethod
-    def full(
-        cls: Type[DataClass[PInit]],
-        sizes: Sizes,
-        fill_value: Any,
-        order: Order = "C",
-        **kwargs: Any,
-    ) -> xr.Dataset: ...
+        @overload
+        @classmethod
+        def full(
+            cls: Type[OptionedClass[PInit, TDataset]],
+            sizes: Sizes,
+            fill_value: Any,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> TDataset: ...
+
+        @overload
+        @classmethod
+        def full(
+            cls: Type[DataClass[PInit]],
+            sizes: Sizes,
+            fill_value: Any,
+            order: Order = "C",
+            **kwargs: Any,
+        ) -> xr.Dataset: ...
 
     @classmethod
     def full(

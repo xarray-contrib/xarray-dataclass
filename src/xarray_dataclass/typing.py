@@ -17,7 +17,6 @@ Note:
 
 __all__ = ["Attr", "Coord", "Coordof", "Data", "Dataof", "Name"]
 
-
 # standard library
 from dataclasses import Field, is_dataclass
 from enum import Enum
@@ -39,6 +38,7 @@ from typing import (
     Protocol,
     Sequence,
     Tuple,
+    TYPE_CHECKING,
     Type,
     TypeVar,
     Union,
@@ -46,10 +46,18 @@ from typing import (
 
 
 # dependencies
-import numpy as np
-import xarray as xr
 from typing_extensions import ParamSpec, TypeAlias
 
+# submodules
+from .util import lazy_import
+
+# lazy imports of large modules
+if TYPE_CHECKING:
+    import numpy as np
+    import xarray as xr
+else:
+    np = lazy_import("numpy")
+    xr = lazy_import("xarray")
 
 # type hints (private)
 PInit = ParamSpec("PInit")
@@ -62,7 +70,7 @@ THashable = TypeVar("THashable", bound=Hashable)
 AnyArray: TypeAlias = np.ndarray[Any, Any]
 AnyDType: TypeAlias = np.dtype[Any]
 AnyField: TypeAlias = Field[Any]
-AnyXarray: TypeAlias = Union[xr.DataArray, xr.Dataset]
+AnyXarray: TypeAlias = Union["xr.DataArray", "xr.Dataset"]
 Dims = Tuple[str, ...]
 Order = Literal["C", "F"]
 Shape = Union[Sequence[int], int]
