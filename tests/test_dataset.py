@@ -6,13 +6,14 @@ from typing import Literal, Tuple
 # dependencies
 import numpy as np
 import xarray as xr
+from typing_extensions import TypeAlias
 
 
 # submodules
-from xarray_dataclasses.dataarray import AsDataArray
-from xarray_dataclasses.dataset import AsDataset
-from xarray_dataclasses.dataoptions import DataOptions
-from xarray_dataclasses.typing import Attr, Coord, Data
+from xarray_dataclass.dataarray import AsDataArray
+from xarray_dataclass.dataset import AsDataset
+from xarray_dataclass.dataoptions import DataOptions
+from xarray_dataclass.typing import Attr, Coord, Data
 
 # constants
 DIMS = "x", "y"
@@ -24,9 +25,7 @@ X = Literal["x"]
 Y = Literal["y"]
 
 
-# dataclasses
-class Custom(xr.Dataset):
-    __slots__ = ()
+Custom: TypeAlias = xr.Dataset
 
 
 @dataclass

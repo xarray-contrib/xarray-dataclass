@@ -1,21 +1,25 @@
-# xarray-dataclasses
+# xarray-dataclass
 
-[![Release](https://img.shields.io/pypi/v/xarray-dataclasses?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclasses/)
-[![Python](https://img.shields.io/pypi/pyversions/xarray-dataclasses?label=Python&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclasses/)
-[![Downloads](https://img.shields.io/pypi/dm/xarray-dataclasses?label=Downloads&color=cornflowerblue&style=flat-square)](https://pepy.tech/project/xarray-dataclasses)
-[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.4624819-cornflowerblue?style=flat-square)](https://doi.org/10.5281/zenodo.4624819)
-[![Tests](https://img.shields.io/github/actions/workflow/status/astropenguin/xarray-dataclasses/tests.yml?label=Tests&style=flat-square)](https://github.com/astropenguin/xarray-dataclasses/actions)
+[![Release](https://img.shields.io/pypi/v/xarray-dataclass?label=Release&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
+[![Python](https://img.shields.io/pypi/pyversions/xarray-dataclass?label=Python&color=cornflowerblue&style=flat-square)](https://pypi.org/project/xarray-dataclass/)
+[![Downloads](https://img.shields.io/pypi/dm/xarray-dataclass?label=Downloads&color=cornflowerblue&style=flat-square)](https://pepy.tech/project/xarray-dataclass)
+[![DOI](https://zenodo.org/badge/945912243.svg)](https://doi.org/10.5281/zenodo.16604747)
+[![Tests](https://img.shields.io/github/actions/workflow/status/xarray-contrib/xarray-dataclass/tests.yml?label=Tests&style=flat-square)](https://github.com/xarray-contrib/xarray-dataclass/actions/workflows/tests.yaml)
 
 xarray data creation by data classes
 
+This repository is adapted from [here](https://github.com/astropenguin/xarray-dataclasses). We are grateful for the
+work of the developer on this repo. Sadly, that repository is inactive. Thus, a fork was moved here in order to allow
+for more visibility and community maintenance.
+
 ## Overview
 
-xarray-dataclasses is a Python package that makes it easy to create [xarray]'s DataArray and Dataset objects that are "typed" (i.e. fixed dimensions, data type, coordinates, attributes, and name) using [the Python's dataclass]:
+xarray-dataclass is a Python package that makes it easy to create [xarray]'s DataArray and Dataset objects that are "typed" (i.e. fixed dimensions, data type, coordinates, attributes, and name) using [the Python's dataclass]:
 
 ```python
 from dataclasses import dataclass
 from typing import Literal
-from xarray_dataclasses import AsDataArray, Coord, Data
+from xarray_dataclass import AsDataArray, Coord, Data
 
 
 X = Literal["x"]
@@ -46,21 +50,24 @@ class Image(AsDataArray):
 
 ### Installation
 
+There are multiple ways you can install xarray-dataclass, dependent on what kind of dependency manager you use.
+
 ```shell
-pip install xarray-dataclasses
+pip install xarray-dataclass
+pixi add --pypi xarray-dataclass
 ```
 
 ## Basic usage
 
-xarray-dataclasses uses [the Python's dataclass].
+xarray-dataclass uses [the Python's dataclass].
 Data (or data variables), coordinates, attributes, and a name of DataArray or Dataset objects will be defined as dataclass fields by special type hints (`Data`, `Coord`, `Attr`, `Name`), respectively.
 Note that the following code is supposed in the examples below.
 
 ```python
 from dataclasses import dataclass
 from typing import Literal
-from xarray_dataclasses import AsDataArray, AsDataset
-from xarray_dataclasses import Attr, Coord, Data, Name
+from xarray_dataclass import AsDataArray, AsDataset
+from xarray_dataclass import Attr, Coord, Data, Name
 
 
 X = Literal["x"]
@@ -196,13 +203,13 @@ Attributes:
 
 ### Coordof and Dataof type hints
 
-xarray-dataclasses provides advanced type hints, `Coordof` and `Dataof`.
+xarray-dataclass provides advanced type hints, `Coordof` and `Dataof`.
 Unlike `Data` and `Coord`, they specify a dataclass that defines a DataArray class.
 This is useful when users want to add metadata to dimensions for [plotting].
 For example:
 
 ```python
-from xarray_dataclasses import Coordof
+from xarray_dataclass import Coordof
 
 
 @dataclass
@@ -287,7 +294,7 @@ A custom factory for DataArray or Dataset creation is only supported in the curr
 
 ```python
 import xarray as xr
-from xarray_dataclasses import DataOptions
+from xarray_dataclass import DataOptions
 
 
 class Custom(xr.DataArray):
@@ -318,12 +325,12 @@ image.custom_method()  # True
 
 ### DataArray and Dataset creation without shorthands
 
-xarray-dataclasses provides functions, `asdataarray` and `asdataset`.
+xarray-dataclass provides functions, `asdataarray` and `asdataset`.
 This is useful when users do not want to inherit the mix-in class (`AsDataArray` or `AsDataset`) in a DataArray or Dataset dataclass.
 For example:
 
 ```python
-from xarray_dataclasses import asdataarray
+from xarray_dataclass import asdataarray
 
 
 @dataclass
@@ -338,6 +345,68 @@ class Image:
 image = asdataarray(Image([[0, 1], [2, 3]], [0, 1], [0, 1]))
 ```
 
+## How to contribute
+
+Thank you for being willing to contribute! If you have some ideas to propose, please open an [issue](https://github.com/xarray-contrib/xarray-dataclass/issues).
+We use [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) for developing and managing the project.
+The first section describes how to contribute with it.
+The second and third sections explain how to prepare a local development environment and our automated workflows in GitHub Actions, respectively.
+
+
+### Get the source code
+
+```shell
+git clone https://github.com/xarray-contrib/xarray-dataclass
+cd xarray-dataclass
+```
+
+### Install dependencies
+
+First install [pixi](https://pixi.sh/latest/installation/). Then, install project dependencies:
+
+```shell
+pixi install -a
+pixi run -e dev pre-commit install
+```
+
+### Testing, linting, and formatting
+We have a test workflow for testing and a pre-commit workflow for static type checking, linting, and formatting the code.
+It is performed when a pull request is created against main.
+If you would like to check them in local, the following commands are almost equivalent (the difference is that the test workflows are run under multiple Python versions).
+Furthermore, these tasks are defined only in the `dev` environment. Pixi does not require you to specify the environment
+in that case.
+
+```
+pixi run tests
+pixi run precommit # This runs pre-commit on all files.
+```
+
+### Creating documentation
+We also have a documentation workflow. However, if you want to locally create the documentation
+run the following:
+
+```shell
+pixi run doc_build # this just creates the build
+pixi run doc_serve # build and serve at http://localhost:8000/
+```
+
+### Create a release
+
+This section is relevant only for maintainers.
+
+1. Pull `git`'s `main` branch.
+2. `pixi install -a`
+3. `pixi run -e dev pre-commit install`
+4. `pixi run tests`
+5. `pixi shell`
+6. `hatch version <new-version>`
+7. `git add .`
+8. `git commit -m "ENH: Bump version to <version>"`
+9. `hatch build`
+10. `hatch publish`
+11. `git push upstream main`
+12. Create a new tag and Release via the GitHub UI. Auto-generate release notes
+    and add additional notes as needed.
 
 <!-- References -->
 [Pyright]: https://github.com/microsoft/pyright

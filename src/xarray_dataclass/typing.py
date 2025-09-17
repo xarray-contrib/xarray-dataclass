@@ -5,9 +5,9 @@ Note:
 
         from dataclasses import dataclass
         from typing import Literal
-        from xarray_dataclasses import AsDataArray, AsDataset
-        from xarray_dataclasses import Attr, Coord, Data, Name
-        from xarray_dataclasses import Coordof, Dataof
+        from xarray_dataclass import AsDataArray, AsDataset
+        from xarray_dataclass import Attr, Coord, Data, Name
+        from xarray_dataclass import Coordof, Dataof
 
 
         X = Literal["x"]
@@ -22,11 +22,15 @@ from dataclasses import Field, is_dataclass
 from enum import Enum
 from itertools import chain
 from typing import (
+    Annotated,
     Any,
     ClassVar,
     Collection,
     Dict,
     Generic,
+    get_args,
+    get_origin,
+    get_type_hints,
     Hashable,
     Iterable,
     Literal,
@@ -42,14 +46,7 @@ from typing import (
 
 
 # dependencies
-from typing_extensions import (
-    Annotated,
-    ParamSpec,
-    TypeAlias,
-    get_args,
-    get_origin,
-    get_type_hints,
-)
+from typing_extensions import ParamSpec, TypeAlias
 
 # submodules
 from .util import lazy_import
@@ -70,10 +67,10 @@ TDims = TypeVar("TDims", covariant=True)
 TDType = TypeVar("TDType", covariant=True)
 THashable = TypeVar("THashable", bound=Hashable)
 
-AnyArray: TypeAlias = "np.ndarray[Any, Any]"
-AnyDType: TypeAlias = "np.dtype[Any]"
-AnyField: TypeAlias = "Field[Any]"
-AnyXarray: TypeAlias = "xr.DataArray | xr.Dataset"
+AnyArray: TypeAlias = np.ndarray[Any, Any]
+AnyDType: TypeAlias = np.dtype[Any]
+AnyField: TypeAlias = Field[Any]
+AnyXarray: TypeAlias = Union["xr.DataArray", "xr.Dataset"]
 Dims = Tuple[str, ...]
 Order = Literal["C", "F"]
 Shape = Union[Sequence[int], int]
@@ -333,7 +330,7 @@ def get_dims(tp: Any) -> Dims:
     return tuple(str(get_args(arg)[0]) for arg in args)
 
 
-def get_dtype(tp: Any) -> Optional[AnyDType]:
+def get_dtype(tp: Any) -> Optional[AnyDType]:  # pyright: ignore[reportUnknownParameterType]
     """Extract a NumPy data type (dtype)."""
     try:
         dtype = get_args(get_args(get_annotated(tp))[1])[0]

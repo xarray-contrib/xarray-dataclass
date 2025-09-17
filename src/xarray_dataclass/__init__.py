@@ -16,8 +16,8 @@ __all__ = [
     "datamodel",
     "dataoptions",
     "typing",
+    "__version__",
 ]
-__version__ = "1.9.1"
 
 
 # submodules
@@ -26,8 +26,16 @@ from . import dataset
 from . import datamodel
 from . import dataoptions
 from . import typing
-from .dataarray import *
-from .dataset import *
-from .datamodel import *
-from .dataoptions import *
-from .typing import *
+from .__about__ import __version__
+from .dataarray import AsDataArray, asdataarray
+from .dataset import AsDataset, asdataset
+from .datamodel import DataModel
+from .dataoptions import DataOptions
+from .typing import (
+    Attr,
+    Coord,
+    Coordof,
+    Data,
+    Dataof,
+    Name,
+)

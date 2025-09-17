@@ -1,0 +1,23 @@
+{# Extend the theme's layout #}
+{% extends "!layout.html" %}
+
+{# Add custom elements to the page #}
+{% block extrahead %}
+  {{ super() }}
+  <meta name="docsearch:version" content="{{ version }}">
+{% endblock %}
+
+{# Add version information for the current page #}
+{% block footer %}
+  {{ super() }}
+  <script>
+    // Add version information to the current page
+    document.addEventListener('DOMContentLoaded', function() {
+      // This helps search engines and other tools understand the version of the page
+      var meta = document.createElement('meta');
+      meta.name = 'version';
+      meta.content = '{{ version }}';
+      document.head.appendChild(meta);
+    });
+  </script>
+{% endblock %}
