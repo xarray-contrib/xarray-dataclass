@@ -261,8 +261,8 @@ def get_entry(field: AnyField, value: Any) -> Optional[AnyEntry]:
 def get_typedarray(  # pyright: ignore[reportUnknownParameterType]
     data: Any,
     dims: Dims,
-    dtype: Optional[AnyDType], # pyright: ignore[reportUnknownParameterType]
-    reference: Optional[AnyXarray] = None, # pyright: ignore[reportUnknownParameterType]
+    dtype: Optional[AnyDType],  # pyright: ignore[reportUnknownParameterType]
+    reference: Optional[AnyXarray] = None,  # pyright: ignore[reportUnknownParameterType]
 ) -> "xr.DataArray":
     """Create a DataArray object with given dims and dtype.
 

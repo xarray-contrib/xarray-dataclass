@@ -167,6 +167,7 @@ class AsDataArray:
         return MethodType(new, cls)
 
     if TYPE_CHECKING:
+
         @overload
         @classmethod
         def shaped(
