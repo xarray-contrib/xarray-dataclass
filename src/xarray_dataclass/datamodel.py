@@ -4,12 +4,11 @@ __all__ = ["DataModel"]
 
 
 # standard library
+from collections.abc import Hashable
 from dataclasses import dataclass, field, is_dataclass
 from typing import (
     Any,
     Dict,
-    get_type_hints,
-    Hashable,
     List,
     Literal,
     Optional,
@@ -17,14 +16,13 @@ from typing import (
     Type,
     Union,
     cast,
+    get_type_hints,
 )
-
 
 # dependencies
 import numpy as np
 import xarray as xr
 from typing_extensions import ParamSpec
-
 
 # submodules
 from .typing import (
@@ -41,7 +39,6 @@ from .typing import (
     get_name,
     get_role,
 )
-
 
 # type hints
 PInit = ParamSpec("PInit")

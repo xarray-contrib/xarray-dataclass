@@ -2,11 +2,9 @@
 from dataclasses import dataclass
 from typing import Literal, Tuple
 
-
 # submodules
 from xarray_dataclass.datamodel import DataModel
 from xarray_dataclass.typing import Attr, Coord, Coordof, Data, Dataof
-
 
 # type hints
 X = Literal["x"]
