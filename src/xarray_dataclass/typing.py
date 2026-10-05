@@ -19,6 +19,7 @@ __all__ = ["Attr", "Coord", "Coordof", "Data", "Dataof", "Name"]
 
 
 # standard library
+from collections.abc import Collection, Hashable, Iterable, Sequence
 from dataclasses import Field, is_dataclass
 from enum import Enum
 from itertools import chain
@@ -26,30 +27,24 @@ from typing import (
     Annotated,
     Any,
     ClassVar,
-    Collection,
     Dict,
     Generic,
-    get_args,
-    get_origin,
-    get_type_hints,
-    Hashable,
-    Iterable,
     Literal,
     Optional,
     Protocol,
-    Sequence,
     Tuple,
     Type,
     TypeVar,
     Union,
+    get_args,
+    get_origin,
+    get_type_hints,
 )
-
 
 # dependencies
 import numpy as np
 import xarray as xr
 from typing_extensions import ParamSpec, TypeAlias
-
 
 # type hints (private)
 PInit = ParamSpec("PInit")
@@ -79,8 +74,6 @@ class DataClass(Protocol[PInit]):
 
 class Labeled(Generic[TDims]):
     """Type hint for labeled objects."""
-
-    pass
 
 
 # type hints (public)
