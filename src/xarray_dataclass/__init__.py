@@ -1,36 +1,32 @@
 __all__ = [
     "AsDataArray",
     "AsDataset",
-    "DataModel",
-    "DataOptions",
     "Attr",
     "Coord",
     "Coordof",
     "Data",
+    "DataModel",
+    "DataOptions",
     "Dataof",
     "Name",
+    "__version__",
     "asdataarray",
     "asdataset",
     "dataarray",
-    "dataset",
     "datamodel",
     "dataoptions",
+    "dataset",
     "typing",
-    "__version__",
 ]
 
 
 # submodules
-from . import dataarray
-from . import dataset
-from . import datamodel
-from . import dataoptions
-from . import typing
+from . import dataarray, datamodel, dataoptions, dataset, typing
 from .__about__ import __version__
 from .dataarray import AsDataArray, asdataarray
-from .dataset import AsDataset, asdataset
 from .datamodel import DataModel
 from .dataoptions import DataOptions
+from .dataset import AsDataset, asdataset
 from .typing import (
     Attr,
     Coord,
