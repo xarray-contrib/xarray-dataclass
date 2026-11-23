@@ -1,12 +1,11 @@
 # standard library
-from typing import Any, Literal as L, Tuple, Union
-
+from typing import Annotated as Ann
+from typing import Any, Tuple, Union
+from typing import Literal as L
 
 # dependencies
 import numpy as np
 from pytest import mark
-from typing_extensions import Annotated as Ann
-
 
 # submodules
 from xarray_dataclass.typing import (
@@ -20,7 +19,6 @@ from xarray_dataclass.typing import (
     get_name,
     get_role,
 )
-
 
 # test datasets
 testdata_dims = [

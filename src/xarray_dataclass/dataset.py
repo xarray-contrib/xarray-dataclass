@@ -9,18 +9,15 @@ from inspect import signature
 from types import MethodType
 from typing import Any, Callable, Dict, Optional, Protocol, Type, TypeVar, overload
 
-
 # dependencies
 import numpy as np
 import xarray as xr
 from typing_extensions import ParamSpec
 
-
 # submodules
 from .datamodel import DataModel
 from .dataoptions import DataOptions
 from .typing import AnyArray, AnyXarray, DataClass, Order, Shape, Sizes
-
 
 # type hints
 PInit = ParamSpec("PInit")
@@ -143,8 +140,8 @@ class AsDataset:
         def new(cls: Any, *args: Any, **kwargs: Any) -> Any:
             return asdataset(cls(*args, **kwargs))
 
-        setattr(new, "__doc__", cls.__init__.__doc__)
-        setattr(new, "__signature__", sig)
+        new.__doc__ = cls.__init__.__doc__
+        new.__signature__ = sig
         return MethodType(new, cls)
 
     @overload

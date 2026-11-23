@@ -1,13 +1,14 @@
 # standard library
+from collections.abc import Collection
 from dataclasses import dataclass
-from typing import Collection, Literal as L, Tuple, Union
-
+from typing import Annotated as Ann
+from typing import Literal as L
+from typing import Tuple, Union
 
 # dependencies
 import numpy as np
-from typing_extensions import Annotated as Ann
-from xarray_dataclass.typing import Attr, Coord, Coordof, Data
 
+from xarray_dataclass.typing import Attr, Coord, Coordof, Data
 
 # type hints
 X = L["x"]
